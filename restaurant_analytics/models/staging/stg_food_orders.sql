@@ -9,5 +9,7 @@ SELECT
 	day_of_the_week AS day_of_week, 
 	rating, 
 	CAST(food_preparation_time AS INTEGER) AS prep_time, 
-	CAST(delivery_time AS INTEGER) AS delivery_time 
+	CAST(delivery_time AS INTEGER) AS delivery_time, 
+	CAST('2026-01-01' AS DATE) + (CAST(order_id AS INT) % 180) AS order_created_at
+
 FROM {{ ref('food_order') }}
