@@ -13,3 +13,18 @@ SELECT
 	CAST('2026-01-01' AS DATE) + (CAST(order_id AS INT) % 180) AS order_created_at
 
 FROM {{ ref('food_order') }}
+
+UNION ALL
+
+SELECT
+    order_id,
+    customer_id,
+    restaurant_name,
+    cuisine_type,
+    cost_of_the_order AS order_cost,
+    day_of_the_week AS day_of_week,
+    rating,
+    food_preparation_time AS prep_time,
+    delivery_time,
+    CAST('2026-07-01' AS DATE) AS order_created_at
+FROM {{ ref('new_food_orders') }}
