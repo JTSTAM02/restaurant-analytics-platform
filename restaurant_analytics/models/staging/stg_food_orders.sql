@@ -10,7 +10,9 @@ SELECT
 	rating, 
 	CAST(food_preparation_time AS INTEGER) AS prep_time, 
 	CAST(delivery_time AS INTEGER) AS delivery_time, 
-	CAST('2026-01-01' AS DATE) + (CAST(order_id AS INT) % 180) AS order_created_at
+	CAST('2026-01-01' AS DATE) + (CAST(order_id AS INT) % 180) AS order_created_at,
+	CAST('2026-01-01' AS DATE) + (CAST(order_id AS INT) % 180) AS order_updated_at,
+
 
 FROM {{ ref('food_order') }}
 
@@ -26,5 +28,7 @@ SELECT
     rating,
     food_preparation_time AS prep_time,
     delivery_time,
-    CAST('2026-07-01' AS DATE) AS order_created_at
+    CAST('2026-07-01' AS DATE) AS order_created_at,
+    CAST('2026-01-01' AS DATE) + (CAST(order_id AS INT) % 180) AS order_updated_at, 
+
 FROM {{ ref('new_food_orders') }}
