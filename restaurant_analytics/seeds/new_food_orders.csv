@@ -1,5 +1,5 @@
 order_id,customer_id,restaurant_name,cuisine_type,cost_of_the_order,day_of_the_week,rating,food_preparation_time,delivery_time
-2000001,501,Hangawi,Korean,24.50,Weekday,5,22,25
+2000001,501,Hangawi,Korean,24.50,Weekday,3,22,25
 2000002,502,Blue Ribbon Sushi Izakaya,Japanese,18.75,Weekday,4,28,30
 2000003,503,Cafe Habana,Mexican,15.25,Weekend,5,20,24
 2000004,504,The Meatball Shop,American,21.00,Weekday,4,25,27
