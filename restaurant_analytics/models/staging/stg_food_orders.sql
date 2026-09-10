@@ -29,6 +29,6 @@ SELECT
     food_preparation_time AS prep_time,
     delivery_time,
     CAST('2026-07-01' AS DATE) AS order_created_at,
-    CAST('2026-07-02' AS DATE) + (CAST(order_id AS INT) % 180) AS order_updated_at, 
+    CAST('2026-07-03' AS DATE) + (CAST(order_id AS INT) % 180) AS order_updated_at, 
 
 FROM {{ ref('new_food_orders') }}
