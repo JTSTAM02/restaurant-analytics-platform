@@ -1,6 +1,7 @@
 {{ config
 	(materialized='incremental',
-	unique_key='order_id'		
+	unique_key='order_id',		
+        incremental_strategy='merge'
 ) }}
 
 SELECT
@@ -11,6 +12,7 @@ SELECT
     o.order_cost,
     o.day_of_week,
     o.rating,
+    {{ rating_filter('rating') }} AS rating_category,
     o.prep_time,
     o.delivery_time, 
     o.order_created_at,
