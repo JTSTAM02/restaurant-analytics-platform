@@ -18,7 +18,7 @@ SELECT
     o.delivery_time, 
     o.order_created_at,
     o.order_updated_at
-FROM {{ ref('stg_food_orders') }} o
+FROM {{ ref('int_orders') }} o
 JOIN {{ ref('dim_restaurant') }} r
     ON r.restaurant_name = o.restaurant_name
 JOIN {{ ref('dim_cuisine') }} c
