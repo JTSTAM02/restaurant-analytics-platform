@@ -1,24 +1,140 @@
 version: 2
 
 models:
-  - name: fct_orders
+
+  - name: stg_food_orders
+    description: "Staging model containing cleaned and type-cast food order records from the source data."
+
     columns:
       - name: order_id
+        description: "Unique identifier for the order."
+        data_tests:
+          - not_null
+
+      - name: customer_id
+        description: "Identifier for the customer who placed the order."
+        data_tests:
+          - not_null
+
+      - name: restaurant_name
+        description: "Name of the restaurant associated with the order."
+        data_tests:
+          - not_null
+
+      - name: cuisine_type
+        description: "Cuisine type associated with the order."
+        data_tests:
+          - not_null
+
+
+  - name: int_orders
+    description: "Intermediate model containing the latest version of each order after deduplication."
+
+    columns:
+      - name: order_id
+        description: "Unique identifier for the order. One row is retained per order."
         data_tests:
           - unique
           - not_null
 
+      - name: customer_id
+        description: "Identifier for the customer who placed the order."
+        data_tests:
+          - not_null
+
+      - name: restaurant_name
+        description: "Name of the restaurant associated with the order."
+        data_tests:
+          - not_null
+
+      - name: cuisine_type
+        description: "Cuisine type associated with the order."
+        data_tests:
+          - not_null
+
+
+  - name: dim_restaurant
+    description: "Dimension containing one record per restaurant."
+
+    columns:
       - name: restaurant_id
+        description: "Unique identifier for the restaurant."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: restaurant_name
+        description: "Name of the restaurant."
+        data_tests:
+          - unique
+          - not_null
+
+
+  - name: dim_cuisine
+    description: "Dimension containing one record per cuisine type."
+
+    columns:
+      - name: cuisine_id
+        description: "Unique identifier for the cuisine."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: cuisine_type
+        description: "Name of the cuisine type."
+        data_tests:
+          - unique
+          - not_null
+
+
+  - name: fct_orders
+    description: "Current-state fact table containing one record per order."
+
+    columns:
+      - name: order_id
+        description: "Unique identifier for the order."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: "Identifier for the customer who placed the order."
+        data_tests:
+          - not_null
+
+      - name: restaurant_id
+        description: "Foreign key identifying the restaurant associated with the order."
         data_tests:
           - not_null
           - relationships:
               to: ref('dim_restaurant')
               field: restaurant_id
+
       - name: cuisine_id
+        description: "Foreign key identifying the cuisine associated with the order."
         data_tests:
           - not_null
           - relationships:
               to: ref('dim_cuisine')
               field: cuisine_id
-  
 
+      - name: order_cost
+        description: "Cost of the food order."
+
+      - name: rating
+        description: "Customer rating for the order. May be null or contain 'Not given'."
+
+      - name: rating_category
+        description: "Categorical interpretation of the order rating."
+
+      - name: prep_time
+        description: "Food preparation time in minutes."
+
+      - name: delivery_time
+        description: "Delivery time in minutes."
+
+      - name: order_created_at
+        description: "Timestamp when the order was created."
+
+      - name: order_updated_at
+        description: "Timestamp representing the most recent update to the order."

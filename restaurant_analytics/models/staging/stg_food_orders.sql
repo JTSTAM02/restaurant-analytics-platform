@@ -8,6 +8,7 @@ SELECT
     CAST(cost_of_the_order AS DECIMAL(9, 2)) AS order_cost,
     day_of_the_week AS day_of_week,
     rating,
+    TRY_CAST(rating AS INTEGER) AS rating_numeric,
     CAST(food_preparation_time AS INTEGER) AS prep_time,
     CAST(delivery_time AS INTEGER) AS delivery_time,
     CAST(order_created_at AS TIMESTAMP) AS order_created_at,

@@ -1,7 +1,5 @@
 {% macro null_count(columns) %}
 
-SELECT
-
 {% for column in columns %}
 
     SUM(CASE
@@ -10,7 +8,5 @@ SELECT
     END) AS {{ column }}_nulls{% if not loop.last %},{% endif %}
 
 {% endfor %}
-
-FROM {{ ref('stg_food_orders') }}
 
 {% endmacro %}
