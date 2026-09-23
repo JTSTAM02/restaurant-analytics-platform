@@ -28,7 +28,7 @@ JOIN {{ ref('dim_cuisine') }} c
 {% if is_incremental() %}
 
 WHERE o.order_updated_at >= (
-	SELECT MAX(order_updated_at)
+	SELECT MAX(order_updated_at) - INTERVAL '1 day'
 	FROM {{ this }}
 )
 
