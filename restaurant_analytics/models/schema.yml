@@ -127,6 +127,13 @@ models:
       - name: rating_category
         description: "Categorical interpretation of the order rating."
 
+      - name: rating_numeric
+        description: "Numeric customer rating, NULL indicates no rating was provided."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [3, 4, 5]
+
       - name: prep_time
         description: "Food preparation time in minutes."
 
